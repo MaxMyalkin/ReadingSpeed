@@ -6,6 +6,7 @@ import TopBar from './common/TopBar';
 import Title from './common/Title';
 import {valueRange} from "../utils";
 import Testing from './Testing';
+import Results from './Results';
 
 const STATES = {
     SELECTION: [1, "Настройка параметров текста"],
@@ -18,14 +19,17 @@ class App extends BaseComponent {
   constructor(props) {
       super(props);
       this.state = {
-          columnWidth: 300,
-          columnCount: 3,
-          fontSize: 20,
-          interline: 10,
-          font: '',
-          state: STATES.SELECTION
+          params: {
+            columnWidth: 300,
+            columnCount: 3,
+            fontSize: 20,
+            interline: 10,
+            font: '',
+          },
+          state: STATES.SELECTION,
+          results: []
       };
-      this.bind('onChangeParameter', 'onStart', 'onFinish')
+      this.bind('onChangeParameter', 'onStart', 'onFinish', 'onSelectParameters');
   }
 
   onChangeParameter(key, value) {
@@ -37,7 +41,7 @@ class App extends BaseComponent {
           interline: valueRange(0, 100, value)
       };
       state[key] = validationInfo[key];
-      this.setState(state);
+      this.setState({params: state});
   }
 
   onStart() {
@@ -46,10 +50,21 @@ class App extends BaseComponent {
       });
   }
 
-  onFinish() {
+  onSelectParameters() {
       this.setState({
-          state: STATES.RESULT
+          state: STATES.SELECTION
       });
+  }
+
+  onFinish(length, time, params) {
+      const newState = {
+        state: STATES.RESULT,
+        results: this.state.results
+      };
+      params.length = length;
+      params.time = time;
+      newState.results.push(params);
+      this.setState(newState);
   }
 
   render() {
@@ -58,9 +73,12 @@ class App extends BaseComponent {
             <TopBar title="Оценка влияния характеристик текста на скорость чтения" />
             <Title>{ this.state.state[1] }</Title>
             { this.state.state === STATES.SELECTION
-            && <Parameters params={this.state} onChange={ this.onChangeParameter } onStart={ this.onStart }/> }
+            && <Parameters params={this.state.params} onChange={ this.onChangeParameter } onStart={ this.onStart }/> }
             { this.state.state === STATES.TEST
-            && <Testing params={this.state} onFinish={ this.onFinish }/> }
+            && <Testing params={this.state.params} onFinish={ this.onFinish }/> }
+            { this.state.state === STATES.RESULT
+            && <Results results={this.state.results} onSelectParameters={ this.onSelectParameters }/> }
+
         </div>
     );
   }
