@@ -15,7 +15,7 @@ class StopWatch extends BaseComponent {
     }
 
     componentDidMount() {
-        this.intervalId = setInterval(this.makeTick, 1000);
+        this.intervalId = setInterval(this.makeTick, 100);
     }
 
     onStopTimer() {
@@ -38,7 +38,7 @@ class StopWatch extends BaseComponent {
     render() {
         return (
             <div>
-                <Button hollow={true} size="large" expanded={true} onClick={ this.onStopTimer }>Время чтения: { Math.floor(this.state.currentTime / 1000)}; { this.props.stopTitle }</Button>
+                <Button hollow={true} size="large" expanded={true} onClick={ this.onStopTimer }>{ this.props.stopTitle } ( { Math.floor(this.state.currentTime / 1000)} )</Button>
             </div>
         );
     }

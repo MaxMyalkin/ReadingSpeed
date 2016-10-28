@@ -24,7 +24,7 @@ class App extends BaseComponent {
             columnCount: 3,
             fontSize: 20,
             interline: 10,
-            font: '',
+            font: 'Arial',
           },
           state: STATES.SELECTION,
           results: []
@@ -33,12 +33,13 @@ class App extends BaseComponent {
   }
 
   onChangeParameter(key, value) {
-      const state = {};
+      const state = this.state.params;
       const validationInfo = {
-          columnWidth: valueRange(10, 500, value),
-          columnCount: valueRange(1, 6, value),
-          fontSize: valueRange(1, 300, value),
-          interline: valueRange(0, 100, value)
+          columnWidth: valueRange(10, 500, parseInt(value, 10)),
+          columnCount: valueRange(1, 6, parseInt(value, 10)),
+          fontSize: valueRange(1, 300, parseInt(value, 10)),
+          interline: valueRange(0, 100, parseInt(value, 10)),
+          font: value
       };
       state[key] = validationInfo[key];
       this.setState({params: state});
@@ -56,13 +57,11 @@ class App extends BaseComponent {
       });
   }
 
-  onFinish(length, time, params) {
+  onFinish(params) {
       const newState = {
         state: STATES.RESULT,
         results: this.state.results
       };
-      params.length = length;
-      params.time = time;
       newState.results.push(params);
       this.setState(newState);
   }

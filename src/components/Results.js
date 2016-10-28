@@ -13,18 +13,20 @@ class Results extends BaseComponent {
             <td>{ item.font }</td>
             <td>{ item.interline }</td>
             <td>{ item.columnCount }</td>
-            <td>{ item.time }</td>
+            <td>{ (item.time/1000).toPrecision(3) }</td>
+            <td>{ (item.length/ (item.time/1000)).toPrecision(3) }</td>
         </tr>));
         return (<table>
             <thead>
                 <tr>
-                    <td>Длина текста</td>
-                    <td>Ширина столбца</td>
-                    <td>Размер шрифта</td>
+                    <td>Длина текста, символов</td>
+                    <td>Ширина столбца, px</td>
+                    <td>Размер шрифта, px</td>
                     <td>Шрифт</td>
-                    <td>Расстояние между строками</td>
+                    <td>Расстояние между строками, px</td>
                     <td>Количество столбцов</td>
-                    <td>Время чтения</td></tr>
+                    <td>Время чтения, с</td>
+                    <td>Скорость чтения, символов/с</td></tr>
             </thead>
             <tbody>
                 {rows}

@@ -11,7 +11,9 @@ class Text extends BaseComponent {
         const style = {
             width: `${this.props.columnWidth}px`,
             float: 'left',
-            fontSize: `${this.props.fontSize}px`
+            fontSize: `${this.props.fontSize}px`,
+            lineHeight: `${this.props.fontSize + this.props.interline}px`,
+            fontFamily: this.props.font
         };
         const columnCount = this.props.columnCount;
         const textChunks = splitString(this.props.children, columnCount);
