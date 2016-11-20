@@ -34,8 +34,15 @@ class Parameters extends BaseComponent {
                 </Column>
                 <Column size={4} offset={1} >
                     <Select title="Шрифт" onChange={ (value) => { this.props.onChange('font', value) } }>
-                        <option value="Arial">Arial</option>
-                        <option value="Georgia">Georgia</option>
+                        <option value="Lobster">Lobster (рукописный)</option>
+                        <option value="Bad Script">Bad Script (рукописный)</option>
+                        <option value="PressStart2PRegular">PressStart2PRegular (пиксельный)</option>
+                        <option value="Lora">Lora (засечки)</option>
+                        <option value="EB Garamond">EB Garamond (засечки)</option>
+                        <option value="PT Serif Caption">PT Serif Caption (засечки)</option>
+                        <option value="Roboto">Roboto (гротеск)</option>
+                        <option value="PT Sans">PT Sans (гротеск)</option>
+                        <option value="Arial">Arial (гротеск)</option>
                     </Select>
                 </Column>
                 <Column size={3} offset={1} >

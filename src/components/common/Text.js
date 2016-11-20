@@ -4,15 +4,17 @@ import {chunkString} from "../../utils";
 import {splitString} from "../../utils";
 import Column from './Column';
 import Row from './Row';
+import {getWidthFromMm} from "../../utils";
+import {getFontSize} from "../../utils";
 
 class Text extends BaseComponent {
 
     getColumns() {
         const style = {
-            width: `${this.props.columnWidth}px`,
+            width: `${getWidthFromMm(this.props.columnWidth)}px`,
             float: 'left',
-            fontSize: `${this.props.fontSize}px`,
-            lineHeight: `${this.props.fontSize + this.props.interline}px`,
+            fontSize: `${getFontSize(this.props.fontSize)}px`,
+            lineHeight: `${getFontSize(this.props.fontSize) + getWidthFromMm(this.props.interline)}px`,
             fontFamily: this.props.font
         };
         const columnCount = this.props.columnCount;

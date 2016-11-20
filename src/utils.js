@@ -1,6 +1,10 @@
 
-export function getPixelsByWidth(width) {
-    return width;
+export function getWidthFromMm(width) {
+    return width / 0.264583;
+}
+
+export function getFontSize(size) {
+    return size / 2.834645669291 / 0.264583;
 }
 
 export function valueRange(min, max, value) {

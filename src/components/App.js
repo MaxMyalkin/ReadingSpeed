@@ -37,7 +37,7 @@ class App extends BaseComponent {
       const validationInfo = {
           columnWidth: valueRange(10, 500, parseInt(value, 10)),
           columnCount: valueRange(1, 6, parseInt(value, 10)),
-          fontSize: valueRange(1, 300, parseInt(value, 10)),
+          fontSize: valueRange(1, 50, parseInt(value, 10)),
           interline: valueRange(0, 100, parseInt(value, 10)),
           font: value
       };
